@@ -1,3 +1,10 @@
+import java.util.Random;
+
+interface IComputeEmpWage{
+	public void addCompanyEmpWage( String company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth );
+	public void computeEmpWage();
+}
+
 class CompanyEmpWage {
 
 	public final String company;
@@ -23,7 +30,7 @@ class CompanyEmpWage {
    }
 }
 
-public class EmpWageBuilderArray {
+public class EmpWageBuilderArray implements IComputeEmpWage {
 	//Constans
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
@@ -40,7 +47,7 @@ public class EmpWageBuilderArray {
 		numOfCompany++;
 	}
 
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		for (int i = 0; i < numOfCompany; i++){
 			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
 			System.out.println(companyEmpWageArray[i]);
