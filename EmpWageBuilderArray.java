@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 
 interface IComputeEmpWage{
 	public void addCompanyEmpWage( String company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth );
@@ -36,21 +36,22 @@ public class EmpWageBuilderArray implements IComputeEmpWage {
 	public static final int IS_FULL_TIME = 2;
 
 	private int numOfCompany = 0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 
 	public EmpWageBuilderArray() {
-		companyEmpWageArray = new CompanyEmpWage[5];
+		companyEmpWageArrayList = new ArrayList<>();
 	}
 
 	public void addCompanyEmpWage(String company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth) {
-		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHours, numOfWorkingDays, maxHoursPerMonth);
-		numOfCompany++;
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHours, numOfWorkingDays, maxHoursPerMonth);
+		companyEmpWageArrayList.add(companyEmpWage);
 	}
 
 	public void computeEmpWage() {
-		for (int i = 0; i < numOfCompany; i++){
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+		for (int i = 0; i < companyEmpWageArrayList.size(); i++){
+			CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 
